@@ -15,6 +15,7 @@ pip install -r requirements.txt
     * Normalmente o upload é 10% do Download
  
 ### UTILIZAÇÃO:
+#### Para poder trocar de rede, é necessário executar com privilégio de ROOT (sudo)
 * o script `teste_internet.py` faz o teste utilizando a biblioteca do speedtest
 * o script `resumo.py` traz algumas estatísticas descritivas e a última observação de cada rede
 * o script `comparacao_anatel.py` verifica se as medições estão de acordo com os parâmetros impostos pela anatel de acordo com o contrato
