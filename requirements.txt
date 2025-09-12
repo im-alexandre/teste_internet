@@ -1,0 +1,2 @@
+pandas==2.3.2
+speedtest_cli==2.1.3
