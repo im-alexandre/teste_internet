@@ -7,6 +7,7 @@ from typing import Optional, Tuple
 import speedtest  # pip install speedtest-cli
 import subprocess
 from typing import Optional
+from sys import platform
 
 from config import SSIDS
 
@@ -74,12 +75,16 @@ def main():
         password = net.get('password')
         csv_path = net["csv"]
 
-        print(f"\n=== Conectando em '{ssid}' ===")
-        ok_cmd = connect_wifi(ssid, password)
-        if not ok_cmd:
-            print("não conectou")
-            continue
+        if platform == "linux":
+            print(f"\n=== Conectando em '{ssid}' ===")
+            ok_cmd = connect_wifi(ssid, password)
+            if not ok_cmd:
+                print("não conectou")
+                continue
+        else:
+            print("Testando apenas a rede atual....")
 
+        print(platform)
         print("Conectado. Rodando speedtest…")
         try:
             down, up, ping = speedtest_run()
