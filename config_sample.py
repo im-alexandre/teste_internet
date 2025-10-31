@@ -21,6 +21,9 @@ protocolos_anteriores = []
 top_n_ocorrencias = 5
 tecnologia = "Fixa"
 
+DEFAULT_PASSWORD = "@@@@2025"
+intervalo_segundos = 15
+
 # >>> Ajuste aqui as velocidades contratadas <<<
 CONTRATADO_DOWNLOAD = plano_down  # Mbps
 CONTRATADO_UPLOAD = plano_up  # Mbps
