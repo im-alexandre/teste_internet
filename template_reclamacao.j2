@@ -1,0 +1,48 @@
+{{ hoje }} 
+
+À {{ operadora }} – Atendimento ao Consumidor
+Assunto: Reclamação formal sobre qualidade do serviço de internet banda larga ({{ tecnologia|default("Fixa") }})
+
+Prezados(as),
+
+Eu, {{ cliente_nome }}, CPF {{ cpf }}, residente em {{ cidade }}{{ ", " + uf if uf else "" }}, {{ 'titular do contrato/assinante nº: {{ contrato_numero }},' if contrato_numero else ''}} venho, por meio desta,
+registrar formalmente a minha insatisfação com a qualidade do serviço prestado.
+
+Plano contratado: {{ plano_Download_Mbps }} Mbps download / {{ plano_Upload_Mbps }} Mbps upload ({{ tecnologia|default("Fixa") }}).
+Período monitorado: {{ periodo_inicio }} a {{ periodo_fim }} ({{ dias_monitorados }} dias). Total de medições: {{ total_medicoes }}.
+
+Resumo técnico apurado com base em medições periódicas (logs próprios; metodologia ao final):
+- Velocidade média entregue: {{ media_Download_Mbps }} Mbps (down) / {{ media_Upload_Mbps }} Mbps (up).
+- Piores medições pontuais: {{ pior_Download_Mbps }} Mbps (down em {{ pior_down_ts }}) / {{ pior_Upload_Mbps }} Mbps (up em {{ pior_up_ts }}).
+- Latência média: {{ media_Ping_ms }} ms.
+
+Conformidade (critérios ajustáveis pelo cliente):
+- Mínimo instantâneo esperado: {{ limiar_instantaneo_down_pct }}% do contratado (down) 
+- Mínimo médio esperado: {{ limiar_medio_pct }}% do contratado (download).
+
+Resultados frente aos limites configurados:
+- Amostras abaixo do mínimo instantâneo (download): {{ pct_abaixo_inst_down }}% das leituras ({{ qtd_abaixo_inst_down }}/{{ total_medicoes }}).
+- Amostras abaixo do mínimo instantâneo (upload): {{ pct_abaixo_inst_up }}% das leituras ({{ qtd_abaixo_inst_up }}/{{ total_medicoes }}).
+- Média efetiva vs. contratado: {{ pct_media_down_contrato }}% (down) / {{ pct_media_up_contrato }}% (up).
+
+Principais ocorrências (trechos representativos):
+{% for o in ocorrencias_representativas %}
+- {{ o.timestamp }} — down: {{ o.Download_Mbps }} Mbps / up: {{ o.Upload_Mbps }} Mbps; ping: {{ o.Ping_ms }} ms
+{% endfor %}
+
+Diante do exposto, solicito:
+1) A normalização do serviço no endereço acima;
+2) Abertura e envio de protocolo com os devidos registros técnicos;
+3) Caso as falhas persistam, a aplicação de desconto proporcional na fatura e/ou cancelamento sem multa por descumprimento de qualidade.
+
+Dados do assinante para contato: {{ email }} / {{ telefone }}.
+Protocolo(s) anterior(es): {{ protocolo_anterior|default("n/d") }}.
+
+Metodologia (resumo):
+- Coletas periódicas automatizadas ({{ frequencia_coleta_desc }}), utilizando {{ ferramenta }};
+- Cálculo de médias, mínimos/máximos e latência
+- Indisponibilidade: excluidas as medições com zero
+
+Atenciosamente,
+{{ cliente_nome }}
+{{ cidade }}{{ ", " + uf if uf else "" }}, {{ hoje }}
